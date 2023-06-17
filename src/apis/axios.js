@@ -57,3 +57,12 @@ instanceWithToken.interceptors.response.use(
     return Promise.reject(error);
   }
 );
+
+// src/apis/axios.js
+
+if (process.env.NODE_ENV === "development") {
+  axios.defaults.baseURL = "http://localhost:8000/api";
+} else {
+  axios.defaults.baseURL =
+    "https://web-snulion-week12-react-7xwyjq992llizm3t8g.sel4.cloudtype.app/api";
+}
