@@ -2,7 +2,13 @@ import axios from "axios";
 import { getCookie } from "../utils/cookie";
 import { refreshToken } from "./api";
 
-axios.defaults.baseURL = "http://localhost:8000/api";
+if (process.env.NODE_ENV === "development") {
+  axios.defaults.baseURL = "http://localhost:8000/api";
+} else {
+  axios.defaults.baseURL =
+    "https://web-snulion-week12-react-7xwyjq992llizm3t8g.sel4.cloudtype.app/api";
+}
+
 axios.defaults.withCredentials = true;
 axios.defaults.headers.post["Content-Type"] = "application/json";
 axios.defaults.headers.common["X-CSRFToken"] = getCookie("csrftoken");
@@ -57,12 +63,3 @@ instanceWithToken.interceptors.response.use(
     return Promise.reject(error);
   }
 );
-
-// src/apis/axios.js
-
-if (process.env.NODE_ENV === "development") {
-  axios.defaults.baseURL = "http://localhost:8000/api";
-} else {
-  axios.defaults.baseURL =
-    "https://web-snulion-week12-react-7xwyjq992llizm3t8g.sel4.cloudtype.app/api";
-}
